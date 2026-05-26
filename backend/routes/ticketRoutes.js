@@ -158,8 +158,8 @@ router.patch('/:id', async (req, res) => {
           ticket.resolvedAt = new Date();
         } 
         
-        // Rule 4: Clear resolvedAt if moved back from resolved
-        if (currentStatus === 'resolved' && newStatus !== 'resolved') {
+        // Rule 4: Clear resolvedAt if moved back to an unresolved status (open or in_progress)
+        if (newStatus !== 'resolved' && newStatus !== 'closed') {
           ticket.resolvedAt = undefined;
         }
 
